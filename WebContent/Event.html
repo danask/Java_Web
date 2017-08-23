@@ -12,23 +12,177 @@
 
 
 <body>
+
+
+	</br>
+
+	<!-- DOM0 : In-line Event Model -->
+	<input id = 'changeImageButton' type= 'button' value = 'change' onclick="changeimageX()">  <!-- property = "listener" -->
+	</br></br>
+	<h4 id = 'link'><a href = "http://google.com">Google </a></h4>
+
+
+	<input id = 'listenerButton' type= 'button' value = 'Multi-Event'/>
+
+
+	<!-- Default Form 
+	<form id = "form" action = "eventTest.html">
+		<p> ID <input id = "id" type = "text"/> </p>
+		<p> Password <input id = "password" type = "password"/> </p>
+		<p> Confirm <input id = "password-check" type = "password"/> </p>
+		<p> <input id = "Submit1" type = "submit" value = "Hand-in"/> </p>		
+	</form>
+	-->
+
+	<!-- Add new func. form -->
+	<form id = "form" action = "eventTest.html" onsubmit="return formCheck();">
+		<p> ID <input id = "id" type = "text"/> </p>
+		<p> Password <input id = "password" type = "password"/> </p>
+		<p> Confirm <input id = "password-check" type = "password"/> </p>
+		<p> <input id = "Submit1" type = "submit" value = "Hand-in"/> </p>		
+	</form>
+
+
+	<!-- Event Bubbling -->
+	<div onclick = "alert('div');">
+		<ul onclick = "alert('ul');">
+			<h6 onclick = "alert('h6');">
+				Event Bubbling(Bottom Up)
+			</h6>
+		</ul>
+	</div>		
+
+
+
+
+
+
+
 	<script>
 
-	var image = document.createElement('img');
-	image.src = 'image.jpg';
-	image.width = 500;
-	image.height = 350;
+	var imageX = document.createElement('img');
+	imageX.src = 'image.jpg';
+	imageX.width = 250;
+	imageX.height = 170;
 
-	document.body.appendChild(image);
+	document.body.appendChild(imageX);
 
-	function changeImage(){
-		image.setAttribute('src', 'image2.jpg');
+	function changeimageX()
+	{
+		//console.log(imageX.src);
+
+		//if(imageX.src == 'file:///E:/WS_java/Java_Web/WebContent/imageX.jpg')
+		// imageX.src.substring(imageX.src.length-5, imageX.src.length)
+		if(imageX.getAttribute('src') == 'image.jpg')
+		{
+			// imageX.setAttribute('src','image2.jpg');
+			imageX.setAttribute('src','image2.jpg');
+		}
+		else
+		{
+			imageX.setAttribute('src','image.jpg');
+		}		
+	}
+
+
+	imageX.onmouseover = function()
+	{
+		// alert("changed");
+		// imageX.onmouseover = null;
+		var out = "imageX Event Object(this) : \n";
+		out += this; // this -> imageX
+		this.setAttribute('width', 500);
+		this.setAttribute('height', 350);
+
+		console.log(out);
+		// changeimageX();
+	}
+
+	// changeImageButton.onmouseover = function() 
+	// link.onmouseover = function()// not working due to var declaration
+	// html tags should declare earlier than this.
+
+	var changeImageButton = document.getElementById('changeImageButton');
+
+	changeImageButton.onmouseover = function(evt)
+	{
+		document.getElementById('changeImageButton').style.color = "blue";
+
+		var out = "changeImageButton Event Object(this) : \n";
+		 out += this; // 
+		// this.innerHTML = "Test"; // if 'this' is text...		
+		console.log(out);
+		document.getElementById('changeImageButton').value = "Changed";
+
+
+		// Window Events
+		var eventList = evt || window.event; // for other browsers
+
+		for(var i in eventList)
+		{
+			// console.log(i + " : " + eventList[i]);
+		};
+	}
+
+
+
+
+	function formCheck()
+	{
+		var password = document.getElementById("password");
+		var passwordCheck = document.getElementById("password-check");
+
+		if(password.value == passwordCheck.value)
+			return true;
+		else
+		{
+			console.log(password.value + " : " + passwordCheck.value);
+			alert("Mismatched. Try again!");
+		}
+
+		return false;
+	}
+
+
+	// DOM2(Standard) : multiple-event
+
+	var listenerButton = document.getElementById('listenerButton');
+
+
+	function clickMessage()
+	{
+		alert("Clicked");
+	}
+
+
+	listenerButton.addEventListener('click', changeimageX);  // not function()!!
+	listenerButton.addEventListener('click', clickMessage);
+	listenerButton.removeEventListener('click', clickMessage);
+
+
+
+	window.onload = function()
+	{
+		console.log("window.onload");
+		// alert("onload");
+
+		var form = document.getElementById("form");
+
+		// Default Form : disabled for form submit
+		// form.onsubmit = function()
+		// {
+		// 	return false;
+		// };
+	}
+
+	window.onunload = function()  // ???
+	{
+		// when we go to another page
+		console.log("We're going to another page");
 	}
 
 	</script>
 
-	</br>
-	<input type= 'button' value = 'change' onclick="changeImage()">  <!-- property = "listener" _>
 
 
 </body>
