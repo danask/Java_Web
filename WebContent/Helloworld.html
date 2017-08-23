@@ -1,0 +1,92 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+		var date = new Date();
+		var day = date.getDay();
+		var a;
+		var b = null; 
+		
+		alert(3>2>1);  // true(1) > 1 : false
+		alert(a); // undefined(nothing assigned)
+		alert(b); // null
+		
+		alert("Type of b : " + typeof(b));
+		
+		alert('' == 0); //true(null == 0)
+		alert(a + b);  // undefined_NaN(int)  // Not a Number
+		
+		b = 1;
+		
+		alert("Type of b after assigning : " + typeof(b));
+		
+		alert(b++);  // 1
+		alert(++b);  // 3
+		alert(b--);  // 3
+		alert(--b);  // 1
+		alert("Math.sqrt(b) : " + Math.sqrt(b));
+		
+		
+		// Confirm
+		var check = confirm('Are you sure?');
+
+		alert("Type of 'check' : " + typeof(check));		
+		alert("Type Casting String(check) : " + String(check));
+		
+		if(check)
+		{
+			var input = prompt("Who are you?", "Input your name...");
+			
+			alert("Type of 'input' : " + typeof(input));
+			alert("Type Casting Number(input) : " + Number(input));
+			alert("I'm " + input +'\n'+ "Good\n" + "Day!!");
+		}
+		else
+			alert(check);
+		
+		
+		alert("12" + 34); // "1234"
+		alert("12"%2); // 0
+		
+		
+		// Prompt
+		var c = prompt("Enter your number!");
+		c = Number(c);
+		
+		c%2? alert("Odd number!!") : alert("Even number!!");
+		
+		switch(day)
+		{
+			case 1: 
+				day = "Monday!!";
+				break;		
+			case 2: 
+				day = "Tuesday!!";
+				break;				
+			case 3: 
+				day = "Wednesday!!";
+				break;		
+			case 4: 
+				day = "Thursday!!";
+				break;
+			case 5: 
+				day = "Friday!!";
+				break;				
+			case 6: 
+				day = "Saturday!!";
+				break;
+			default:
+				day = "Sunday!!";
+				break;	
+		}
+		
+		alert(day);	
+		
+		
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+		// Array
+	
+		var array = [1,2,3];// wrong!! {1,2,3};  
+		var arrayObject = [1,'b', 'str', false, array];  //func(){}
+		var strVar = 'abcde'
+		
+		console.log(typeof(array));  // object
+		console.log(arrayObject);  // 123
+		console.log(arrayObject.length); // all~
+		
+		console.log(arrayObject[0] + arrayObject[1]);
+		console.log(strVar.length + strVar[4]);
+		
+		array.push(4);
+		array.push(5); 
+		array.pop(); // stack
+		
+		console.log(array); // 2,3,4,5
+		
+		array[array.length] = 9; // add an element in the next new space(dynamically extended)
+		console.log(array);
+		
+		array.push(strVar); // [2,3,4,5,9, [a,b,c,d,e]]
+		
+
+		
+		
+		var i = 0;
+		var j = 0;
+
+		
+		while( i < array.length)
+		{
+			console.log(array[i++]);  // if <, last element is not printed
+		}
+		
+		do{
+			console.log("do ~ while");
+		}while(0)
+
+		var array2 = [];
+		var out = '';
+		for(var j = 2; j < 10; j++)
+		{
+			//array2[j] = 'a' + j;  // not working
+			for(var i = 1; i < 10; i++)
+			{
+				if(i == 1)
+					continue;
+				
+				out += j +'*' + i +'='+ j*i + ', ';
+			}
+			out += '\n'; 
+		}
+		console.log(out);
+		
+		//console.log(array2);
+
+		
+		
+		// 1. declarative function
+		aaa();
+		
+		
+		// 2. Anonymous function
+		var sum = function(){
+					var input = prompt("Input you number!!", 3);
+					console.log(Number(input) + 10);
+				}
+		
+		console.log(typeof(sum));  // 'function'
+		console.log("\n Ans : "+ sum); // description
+		//sum(); 
+		
+		// 1-1. declarative internal function
+		console.log(prompt);
+		
+		// Overriding
+		var sum2 = sum;
+		sum2(); //
+		
+		// doesn't work
+		//function sum2(){
+		//	console.log("Overriding");
+		//}
+		
+		// 3. no type argu.
+		sum2 = function(a)
+		{
+			console.log("OverR" + a);
+		}
+		
+		sum2(3);
+		
+		// 1. declarative function 
+		function aaa(){
+			console.log("No seq")
+			};
+		
+
+			
+			
+		// 4. arguments and overlapping by using same func. name
+		console.log(parameter(1,2,3));
+			
+		function parameter()
+		{
+			var i = 0;
+			var sum = 0;
+			
+			while(i < arguments.length)
+			{
+				sum += arguments[i];
+				
+				//if(i == (arguments.length - 1))
+					//console.log("sum : " + sum);
+				
+				i++;
+			}
+			return sum; //Number(sum);
+		}
+
+		
+        function parameter() 
+		{
+            var out = '';
+            var length = arguments.length;
+
+            switch(length)
+            {
+            	case 0:
+            		out += "zero";
+            		break;
+            	case 1:
+            		out += "one";
+            		break;
+            	case 2:
+            		out += "two";
+            		break;
+            	case 3:
+            		out += "three";
+            		break;
+            	default:
+            		out += "more than 3";
+	        		break;
+            }
+        	return out;            
+        }
+
+        console.log(parameter(1,2));			
+
+
+
+
+        // 5. inner function : nasted function
+        function outerFunction()
+        {
+        	var a = 10;
+        	
+        	function innerFunction()
+        	{
+        		var b = 20;
+        		
+        		console.log(a);
+        		console.log(b);
+        		
+        		a++;
+        	}
+        	
+        	return innerFunction
+        }
+        
+//		innerFunction();   // not working -> if outerfunction has return function, it is ok
+        
+		var a = outerFunction();  
+		a();   // must do it, in order to get return
+		a();
+		a();   // 22, closure : alive variable, but  why????
+
+		
+		
+        // 6. inner: self-invoking function(just one time trial)
+        (function(name){
+        	console.log("self-invoking : "+ name);
+        })("ASK");
+        
+        
+        
+        // 7. Call-back function: func as a param
+        
+        function check(msg)
+        {
+        	var i = 0, sum = 0;
+        	
+        	while(1)
+        	{
+        		sum +=i;
+        		
+        		if(sum > 20)
+        		{
+        			msg();
+        			break;
+        		}
+        		i++;
+        	}
+        	
+        }
+        
+        //var msg = function()
+        //{
+        	//console.log("SUM is over 20");
+        //}
+        
+        //check(msg);
+        
+        check(function(){
+        			console.log("over 20");
+        		});
+    
+        
+        
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+    
+    // Object
+ 	var car = { name: 'porter', model: '400', color: 'black'};
+ 	var emp = { name: '    A S K ', 
+ 			toJSON: function(){
+ 				return{
+ 					history: 2009
+ 				}
+ 			}}
+
+ 	function printObject(object)
+ 	{
+ 		var out = "";
+ 		for(var i in object)
+ 		{
+ 			out += i + " : " + object[i] + "\n";
+ 		}
+ 		console.log(out);
+ 	}
+
+
+ 	// stringify
+ 	console.log(JSON.stringify(car));
+	console.log(JSON.stringify(emp));
+
+	// parse
+	var newCar = JSON.parse('{"name":"car","model":"400","color":"black"}');  // use ', not "
+	console.log(newCar.name);
+
+	// trim
+	console.log("TRIM:"+ emp.name.trim()+"!!");
+
+
+
+	// ECMA 5
+	// Object : obj name, pro, options
+	// Object.defineProperty(car, 'price', {
+	Object.defineProperties(car, { 
+		price: {		
+			value: 1000,
+			writeable: false,
+			enumerable: true
+		}
+	})
+
+	car.test = "AAA"; // another way w/o perperty
+	car.price = "100000" // not possbile due to wr=false
+
+	printObject(car);
+
+	delete(car.test);
+
+
+	// Object : create = new + defineProperties
+	childCar = Object.create(car, {
+		manufacturer: {value: 'GE', writeable: true, enumerable: true},
+		country: {value: "US", writeable: false, enumerable: true}
+	})
+
+	childCar.name = 'Spark';
+
+	Object.seal(car);
+	delete(car.model);
+
+	printObject(childCar);
+
+	// Confirm properties
+	printObject(Object.getOwnPropertyNames(car)); // defined properties' list
+	printObject(Object.getOwnPropertyDescriptor(childCar, 'manufacturer')); // property's option
+
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

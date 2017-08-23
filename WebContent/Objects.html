@@ -1,0 +1,289 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+
+    	// Timer : Loading order
+ 
+  	
+        //clearTimeout(setTime);
+        
+        console.log(1);
+        
+		var setIntervalTime = setInterval(function(){
+			console.log("setIntervalTime(3000)");
+		}, 3000);
+
+		setTimeout(function(){
+			clearInterval(setIntervalTime);
+		}, 10000);
+
+		console.log(2);
+		
+		
+
+
+		// Encoding
+		
+		var input = "http://www.naver.com?test=테스트";
+		
+		var output = '';
+		
+		output += "escape : " + escape(input) + "\n\n";
+		
+		output += "encodeURI : " + encodeURI(input) + "\n\n";
+		
+		output += "encodeURIComponent : " + encodeURIComponent(input) + "\n\n";
+		
+		console.log(output);
+		
+		
+		// Eval(string to script)
+		
+		console.log(eval('2/0')); // infinity
+		
+		var strTest = '';
+		
+		strTest += "var a = 'eval test!!';";
+		strTest += "console.log(a);";
+		strTest += "console.log('isFinite : ' + isFinite(a));";  // false (if number is true)
+		strTest += "console.log('isNaN : ' + isNaN(a));";  // true
+		strTest += "console.log('parseInt(10.53) : ' + parseInt(10.53));";	
+		
+		eval(strTest);
+		
+
+
+
+
+		var empty = {};  // object Object
+
+		var car = { name: 'car', model : 'ask', color : 'black',
+				
+				company:{start:1977, logo:'star'},
+
+				run : function(speed){
+					console.log(this.name + " is running with " + speed +"km/h")  // this -> myself!!
+				}
+		}
+		
+		// undefined
+//		console.log(empty);
+		console.log(car.name + " "+ car['color'].charAt(2) + " " + car.color[4]  + " " +  car.company.logo);
+		
+//		console.log(car.run);  // print definition as text
+		car.run(300);
+
+
+		//dyn. property/method alloc.
+		car.type = 'SUV';
+		car.print = function()
+		{
+//			console.log('The car model is ' + this.model)
+
+			var out = '-';
+			for(var i in this)  // this == car ?
+			{
+				if(i != 'print' && i != 'run')
+				{
+					out += i +' : '+ this[i] + '\n';
+				}
+			}
+
+			console.log(out);
+		}
+
+		car.print();
+		empty.name = 'AYE';
+		empty.print = car.print;
+		empty.print();
+
+		// delete property
+		delete(car.model);
+		delete car.color;
+		
+		// console.log('name' in car);		
+		for(var i in car)
+		{
+			var inCar = '';
+			
+			inCar = "\'" + i  + "\'" + "in car";  // to judge 'true' or 'false'
+			
+			console.log(i + " : " + eval(inCar));// + " = "+ car[i]);
+		}
+
+		
+		
+		// version #1 
+		
+		var employee0 = {name: 'ASK', english: 99, math: 95};
+		var employee1 = {name: 'LEE', english: 92, math: 98};
+		var employee2 = {name: 'Park', english: 93, math: 91};
+		
+		var samsung = [];
+		samsung.push(employee0);
+		samsung.push(employee1);
+		samsung.push(employee2);
+		
+		var out = "";
+		var avgTotal = 0;
+		
+		for(var i in samsung)
+		{
+//			var subSum = samsung[i].english + samsung[i].math;			
+//			out += samsung[i].name + " : " + subSum / 2 + "\n"; 
+//			avgTotal += subSum;
+
+			samsung[i].getSum = function()
+			{
+				return this.english + this.math;
+			}
+
+			samsung[i].getAvg = function()
+			{
+				return this.getSum()/2;
+			}
+		}
+		
+//		console.log(out + "/" + parseInt(avgTotal/(samsung.length*2)));
+
+		for(var i in samsung)
+		{
+			out += samsung[i].name + " : " + samsung[i].getAvg() + "\n";
+		}
+		
+		console.log(out);
+		
+		
+		
+		
+		
+		
+		// version #2 with function
+		
+		out ="";
+		
+		function inputScores(inputName, inputEnglish, inputMath)
+		{
+			var employee =
+			{
+				name : inputName,
+				english : inputEnglish,
+				math : inputMath,
+				
+				getSum : function()
+				{
+					return this.english + this.math;
+				},
+			
+				getAvg : function()
+				{
+					return this.getSum()/2;
+				}			
+			}
+			
+			return employee;  //////////////////////////////
+		}
+
+		function printTranscript(company)
+		{
+			for(var i in company)
+			{
+				with(company[i])
+				{
+					out += company[i].name + " : " + company[i].getAvg() + "\n";
+				}
+			}
+		
+			console.log(out);
+		}
+		
+		
+		
+		var company = [];
+		
+		company.push(inputScores('ASK', 92, 89));
+		company.push(inputScores('Ahn', 93, 99));
+		company.push(inputScores('Kim', 98, 29));
+		
+		printTranscript(company);
+		
+		
+		
+		
+		
+		
+		// version #3 with constructor+++
+		
+		
+		out ="";
+		
+		function inputScoreC(inputName, inputEnglish, inputMath)
+		{
+			this.name = inputName;   // this -> prototype?
+			this.english = inputEnglish;
+			this.math = inputMath;
+				
+			this.getSum = function()
+			{
+				return this.english + this.math;
+			}; //////////////////////////////////////////
+			
+			this.getAvg = function()
+			{
+				return this.getSum()/2;
+			}
+			
+			inputScoreC.prototype.print = function(){
+				console.log("Add a new method to prototype of constructor function")
+			}
+			
+		}
+		
+		var company2 = [];
+		
+		company2.push(new inputScoreC('ASK', 92, 79));
+		company2.push(new inputScoreC('Ahn', 93, 99));
+		company2.push(new inputScoreC('Kim', 98, 29));
+		
+		printTranscript(company2);
+				
+		
+		// inputScoreConstructor(prototype) <-> Constructor -> Object.prototype
+		var person = new inputScoreC('Hong', 22,33);
+		
+		console.log(car.hasOwnProperty('model')); // method of Object
+		person.print();
+		
+		
+		
+		// this by win/constructor
+		
+		var o = "";
+		
+		function Test()  
+		{
+			o = this;
+		}
+		
+		var o2 = Test();
+		
+		if(o == window){ 
+			console.log("'this' is the object of window!!")
+		};
+		
+		var o3 = new Test();  // constructor function (new func())
+		
+		if(o == o3){ 
+			console.log("'this' is the object by constructor!!")
+		};		
+		
+		console.log(o3 instanceof Test);
+		
+	</script>
+</head>
+<body>
+
+</body>
+</html>

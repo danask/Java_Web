@@ -1,0 +1,127 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+    
+    
+    
+    // Prototype
+    
+	function createScore(inputName, inputEnglish, inputMath)
+	{
+		this.name = inputName;   // this -> prototype?
+		this.english = inputEnglish;
+		this.math = inputMath;
+			
+//		this.getSum = function(){
+//			return this.english + this.math;
+//		};  // repeated
+		
+//		createScore.prototype.print = function(){
+//			console.log("Add a new method to prototype of constructor function")
+//		}
+		
+	}
+	
+
+	createScore.prototype.getSum = function(){
+			return this.english + this.math;
+	};  	
+	
+	createScore.prototype.print = function(){
+		console.log("Add a new method to prototype of constructor function")
+	}
+	
+	// createScoreConstructor(prototype) <-> Constructor -> Object.prototype
+	var person = new createScore('Hong', 22,33);
+	
+	// 1. How can we use hasOwnProperty? -> PT's Obj method
+	console.log(person.hasOwnProperty('model')); // method of Object
+	
+	// 2. How to access print()? -> in PT
+	person.print();
+	
+    
+	
+	
+	
+	// Inheritance : reuse
+	
+	function Person(name)
+	{
+		this.name = name;
+	}
+	
+	
+	// 1. inherited from parent and linked with PT of createScore !!!!!!!!!!!!!!!!
+//	Person.prototype = new createScore(); 
+	
+	// 2. or parent's PT w/o create
+	Person.prototype = createScore.prototype;  
+	
+	Person.prototype.hello = function()  // add new method to inherited PT
+	{
+		return "Hello";
+	};
+	
+	var person2 = new Person();
+	
+	// 1. From PT method of createScore // chained
+	person2.print();
+	
+	// 2. PT from parent + my property
+	console.log(person2.hello());
+	
+	
+	// 3. inheritance from parent's object
+	var employee = { age:20, 
+			print: function(){
+				console.log("employee list");
+			},
+			getNaem: function(){
+				return this.name;
+			}
+	}
+	
+	var person3 = Object.create(employee); // inherited
+	
+	person3.print();
+		
+	
+	// Encapsulation for input validation : Setter
+	
+	function Rectangle(w, h)
+	{
+//		this.width = w;
+		var width;
+			
+		this.setWidth = function(w)  // !!
+		{
+			if(w < 0){ console.log("Out of range!");}
+			else{ width = w;}
+		};
+		
+		this.height = h;
+		
+		this.getArea = function()
+		{
+			return width * this.height;  // !!
+		}
+	}
+	
+	var test = new Rectangle(4,5);  // turn var into object !!
+	
+//	test.width = -1;  // !!
+	test.setWidth(-1);
+		
+	console.log("Area = " + test.getArea());
+	
+	
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

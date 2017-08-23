@@ -1,0 +1,94 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+    
+    var x = 10;
+    function sum(){
+    	return "sum";
+    }
+    // window.alert(window.x);
+    window.console.log(window.sum() + " " + window.x);
+
+    // BOM
+/*    
+    window.open("http://www.google.com",
+     	'', 
+     	'top = 50, left = 100, width = 1000, height = 700, location = yes');
+*/
+
+	// DOM
+/*	
+	var windowTest = window.open("",
+				    	'', 
+				    	'top = 50, left = 100, width = 1000, height = 700');
+
+	windowTest.document.write("Newly created window");
+*/
+
+	var winTest;
+
+	function openWindow()
+	{
+		winTest = window.open("", "", "left=100, top=100, width=50, height=50");
+		winTest.document.write("New Window");
+	}
+
+	function moveWindow()
+	{
+		winTest.moveBy(30, 50);
+		winTest.focus();
+	}
+
+
+	// Onload
+	window.onload = function()
+	{
+		// location, history : defacto std.
+		var browserbrowserPageInfo;
+
+		browserPageInfo = "Current location is " + location.href + "\n";
+		browserPageInfo += "The hostname/protocol is " + location.hostname + " " +location.protocol + "\n"; // http
+		browserPageInfo += "The port is " + location.port + "\n";
+		browserPageInfo += "Origin " + location.origin + "\n";
+		browserPageInfo += "Pathname : " + location.pathname + "\n";
+		browserPageInfo += "Hash : " + location.hash + "\n";
+		browserPageInfo += "Search : " + location.search + "\n";
+		browserPageInfo += "history : " + history.length + "\n";
+
+		console.log(browserPageInfo);
+
+		// navigator
+		var browserInfo;
+
+		browserInfo = "Browser Type : " + navigator.appName + "\n";
+		browserInfo += "Browser Codename : " + navigator.appCodeName + "\n";	
+		browserInfo += "Browser Version : " + navigator.appVersion + "\n";		
+		browserInfo += "OS : " + navigator.platform + "\n";		
+		browserInfo += "Java : " + navigator.javaEnabled() + "\n";		
+
+		console.log(browserInfo);
+
+
+
+		alert("Loading is completed")
+
+//		location.assign("http://googl.com"); // redirection?
+	}
+
+
+
+	</script>
+
+</head>
+
+
+<body>
+	<input type = "button" value = "window-create" onclick = "openWindow()" />
+	<input type = "button" value = "window-move" onclick = "moveWindow()" />
+	<input type = "button" value = "window-close" onclick = "winTest.close()" />
+</body>
+
+
+</html>

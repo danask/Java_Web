@@ -1,0 +1,158 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+    
+    // DOM : printf
+	// document.write("New document in Static(head) area\r\n");
+	// document.writeln("Writeln");
+	document.write("<h3>HeadLine in Static(head) area</h3>");
+	</script>
+
+</head>
+
+
+<body>
+	<script>
+
+	// element
+	var heading = document.createElement("h1");
+
+	// text node
+	var text = document.createTextNode("* This is testing of createTextNode in Dyn(body)\n")
+	heading.appendChild(text);
+
+	// appendChild to print
+	document.body.appendChild(heading);
+	document.body.appendChild(text);  // overwritten on the whole body
+
+
+
+	// image property
+	var image = document.createElement('img');
+	image.src = 'image.jpg'
+	image.width = 500;
+	image.height = 300;
+
+	document.body.appendChild(image);
+
+	// body text node : not changed ... why?
+	// var test = document.createTextNode("Test");
+	// document.body.appendChild(test);
+
+
+
+	var status = "old";
+
+	// setAttribute
+	function changeImageToggle()
+	{
+		if(status == "old")
+		{
+			// change attr
+			image.setAttribute('src', 'image2.jpg');
+
+			// innerHTML
+			textTest.innerHTML = "New : ";  // remove 'body'
+			textTest.textContent += "<h1>To display tag</h1>";
+
+			// change text
+			document.getElementById("Change").value = "New"; // remove 'body'
+			document.getElementById("Change").style.color = "Blue"; 
+			status = "new";
+		}
+		else
+		{
+			image.setAttribute('src', 'image.jpg');
+			
+			// document.body.innerHTML = "Old"; // cover up full page
+			textTest.innerHTML = "Old : ";
+			textTest.textContent += "<h1>To display tag2</h1>";
+
+			// change text
+			document.getElementById("Change").value = "Old"; // remove 'body'
+			status = "old";
+		}
+
+
+	}
+
+
+	// finally
+	window.onload = function()
+	{
+
+		var timer = document.createElement('h3');
+		document.body.appendChild(timer);
+
+		var setTimer = setInterval(function() {
+			timer.innerHTML = new Date().toString();
+		}, 1000)
+
+		setTimeout(function(){
+			clearInterval(setTimer);
+		}, 5000)	
+
+
+
+		document.body.style.backgroundColor = 'gray';
+
+		// querySelector : using CSS selector
+		var qs1 = document.querySelector('#array');
+
+		qs1.innerHTML = "getElementsByName : length is ";
+
+		// remove
+		// document.body.removeChild(qs1);
+		// qs1.parentNode.removeChild(qs1);
+
+		var anchor = document.getElementsByTagName('a');
+		anchor[0].removeAttribute('href');
+
+
+		// Multiple elements
+		var chk = document.getElementsByName('check');  // elements, not element
+		// document.write("Array.Length : " + chk.length);
+		document.getElementById('array').innerHTML += chk.length; // not overwritten
+
+		// Multiple elements : Tag Name
+		var list = document.getElementsByTagName('h5');
+
+		// for(var i = 0; i < list.length; i++)
+		for(var i in list)
+		{
+			list[i].innerHTML += " : Array" + (Number(i)+1); // a bit different 'i' handling
+			list[i].style.color = 'blue';
+			list[i].style.border = '3px red';
+			list[i].style['borderStyle'] = 'dotted';
+			list[i].style['fontSize'] = 20;  // property of CSS, remove '-'
+		}
+
+	}
+
+
+
+	</script>
+
+
+	<br/>
+	<h4 id = "textTest"> Test </h4>
+	<input id = "Change" type = "Button" value = "Change!!" onclick="changeImageToggle()">
+
+	<br/> 
+	<h4 id = "array"> Array.Length : </h4>
+	<input name = "check" type = "button" value = "Spring"/>
+	<input name = "check" type = "button" value = "Summer"/>
+
+	<h5> Happy Day </h5>
+	<h5> Beautiful Day </h5>
+	<h5> Good Day </h5>
+
+	<a href="http://google.com">Google</a>
+	<a href="http://naver.com">Naver</a>
+
+</body>
+
+
+</html>

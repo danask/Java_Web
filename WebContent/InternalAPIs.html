@@ -1,0 +1,156 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+    
+ 	// Array
+	
+	var array = [12, 23, 43, 9, 22];
+	
+	function printArray(inputArray)
+	{
+		var out = "";
+		var x = 0;
+		//var arrayTemp = new Array();  // not work
+		//arrayTemp = array;
+
+		/* 
+		for(var i in inputArray) // why not?
+		{
+			out += (x++) + " : " + inputArray[i] + "\n";
+		}
+		*/
+
+		for(var i = 0; i < array.length; i++)
+		{
+			out += i + " : " + array[i] + "\n";
+		}
+		console.log(out);
+	}
+	
+
+
+	array.push(56);
+	console.log(array.pop());  // stack
+	
+	// 1 : Sort by char !!
+	array.sort();
+	printArray(array);
+	
+	// 2 : by Number !!
+	array.sort(function(a,b){
+		//return a - b  // asc : compare(-)
+		return b - a // desc : compare(+)
+	});
+	
+	printArray(array);
+	
+	// Splice
+	array.splice(0,3, 'a', 'b');  // remove element(zipped) and insert
+	printArray(array);  // cf. string : invariable
+	
+	var array2 = array.slice(0,1); // subString in String
+	printArray(array2); 
+	
+
+	//function deleteArray(array, index) // 
+	// add PT func. as an Array API
+	Array.prototype.deleteArray = function(index)
+	{
+		this.splice(index, 1);
+	}
+
+
+	array.deleteArray(0);
+	printArray(array);
+	
+
+	// ECMA5
+	console.log(Array.isArray(array));
+	console.log(array.indexOf(9));  // 2  // searching direction
+	console.log(array.lastIndexOf(9)); // 2
+
+
+	// forEach
+
+	function printForEach(value, index, arr){  // value, key, array
+		console.log("forEach : " + index + " : " + value);
+		//return value;
+	}
+
+	alert(array.forEach(printForEach)); // no return, undefined
+
+
+
+	// map for array
+	function plusTen(value){
+		return value + 10;
+	}
+
+	// if ele. is true, display in alert
+	alert(array.map(plusTen)); // exe the whole elements ! // return the value 
+
+
+	// filter for array
+	function isString(v, k, array)
+	//function isString(value)
+	{
+		if(typeof(v) == "string")
+		{
+			console.log(k + " : " + v);
+			return v;
+		}
+	}
+
+	console.log(array.filter(isString));  // exe the whole elements ! // return the value
+	//console.log(value + " is string");
+	
+
+	// some
+	function overOne(v, k, array)
+	{
+		if(v > 1) 
+			return true;
+	}
+
+	console.log(array.some(overOne));  // at least 1 element exists
+	console.log(array.every(overOne));
+
+
+	// Date
+	function showCurrentTime()
+	{
+		var currentTime = new Date();
+		var hour = currentTime.getHours();
+		var min = currentTime.getMinutes();
+		var sec = currentTime.getSeconds();
+
+		var amPm = "PM";
+
+		hour < 12? amPm = "AM" : amPm = amPm;
+		min < 10? min = '0' + min : min = min;
+		sec < 10? sec = '0' + sec : sec = sec;
+
+		return hour + ":" + min + ":" + sec + ":" + amPm
+		 + "\n" + currentTime.toLocaleString();
+	}
+
+
+	// var setIntervalTime = setInterval(function(){
+	// 	console.log(showCurrentTime());
+	// }, 1000);
+
+	// setTimeout(function(){
+	// 	clearInterval(setIntervalTime);
+	// }, 2000);
+
+
+
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>
