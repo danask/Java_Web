@@ -1,11 +1,11 @@
 # Java_Web
 Lagacy
 # CSIS 3275 - Assignment #1
-Git Practice with Object Orient Programming
+Git practice with Object Orient Programming
 
-Student Name : Seongku (Daniel) Ahn
-Student Number : 300286629 
-Target app : Movie Information System (same as Team Project theme)
+- Student Name : Seongku (Daniel) Ahn
+- Student Number : 300286629 
+- Target project : Movie Information System (same as Team Project theme)
 
 # File Structure
 - UserManagementTestSAh_300286629: test
