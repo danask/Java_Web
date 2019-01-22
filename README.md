@@ -8,7 +8,7 @@ Git practice with Object Orient Programming
 - Target project : Movie Information System (same as Team Project theme)
 
 # File Structure
-- UserManagementTestSAh_300286629: test
+- UserManagementTestSAh_300286629: test class
 - UserSAh_300286629: abstract class (parent) for encapsulation
 - UserFunctionSAh_300286629: interface for polymorphism
 - GuestSAh_300286629: Guest class (child A) for inheritance
